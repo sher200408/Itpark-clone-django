@@ -2,6 +2,10 @@
 
 This project is a clone of the IT Park platform built using Django.  
 The system allows users to register, login, create profiles and manage projects.
+## Libraries needed for the project
+requirements.txt
+README.md
+.gitignore
 
 ## Features
 
@@ -25,3 +29,18 @@ The system allows users to register, login, create profiles and manage projects.
 - Django Templates
 
 ## Project Structure
+users/
+templates/user/
+models.py
+views.py
+forms.py
+singals.py
+
+apps/
+templates/project/
+models.py
+views.py
+forms.py
+
+templates/
+static/
