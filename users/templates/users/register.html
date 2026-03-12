@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{%  block content %}
+
+
+
+  <div class="auth">
+    <div class="card">
+      <div class="auth__header text-center">
+        <a href="/">
+          <img src="{% static 'images/icon.svg' %}" alt="icon" />
+        </a>
+        <h3>Ro'yxatdan o'tish</h3>
+        <p>Yangi bitiruvchi sahifasini yarating</p>
+      </div>
+
+      <form action="{% url 'register' %}" method="POST" class="form auth__form">
+        {% csrf_token %}
+        <!-- Input:Text -->
+            {% for f in form %}
+
+            <div class="form__field">
+                <label for="formInput#text">{{f.label}} </label>
+                {{f}}
+            </div>
+            {% endfor %}
+
+        <div class="auth__actions">
+          <input class="btn btn--sub btn--lg" type="submit" value="Ro'yxatdan o'tish" />
+        </div>
+      </form>
+      <div class="auth__alternative">
+        <p>Shahsiy sahifangiz yo'qmi?</p>
+        <a href="{% url 'login' %}">Login</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

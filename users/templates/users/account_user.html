@@ -1,0 +1,107 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{%  block content %}
+  <!-- Main Section -->
+  <main class="settingsPage profile my-md">
+    <div class="container">
+      <div class="layout">
+        <div class="column column--1of3">
+          <div class="card text-center">
+            <div class="card__body dev">
+              <a class="tag tag--pill tag--main settings__btn" href="{% url 'account_edit' %}"><i class="fa-solid fa-pen-to-square"></i> O'zgartirish</a>
+              <img class="avatar avatar--xl dev__avatar" src="{{ profil.image.url }}" />
+              <h2 class="dev__name">{{profil.name}}</h2>
+              <p class="dev__title">{{profil.info}}</p>
+              <p class="dev__location">{{profil.location}}</p>
+              <ul class="dev__social">
+                {% if  profil.sacial_github %}
+                    <li>
+                    <a title="Github" href="{{ profil.sacial_github }}" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    </li>
+                {% endif %}
+
+                {% if  profil.sacial_linkedin %}
+                <li>
+                  <a title="Linkedin" href="{{profil.sacial_linkedin}}" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                </li>
+                {% endif %}
+                
+                {% if  profil.sacial_youtube %}
+                <li>
+                  <a title="Youtube" href="{{profil.sacial_youtube}}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                </li>
+                {% endif %}
+
+                {% if  profil.sacial_instagram %}
+                <li>
+                  <a title="Instagram" href="{{ profil.sacial_instagram }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                </li>
+                {% endif %}
+
+              </ul>
+              <a href="#" class="btn btn--sub btn--lg">Habar jo'nating</a>
+            </div>
+          </div>
+        </div>
+        <div class="column column--2of3">
+          <div class="devInfo">
+            <h3 class="devInfo__title">Men haqimda</h3>
+            <p class="devInfo__about">
+              {{profil.bio}}
+            </p>
+          </div>
+          <div class="settings">
+            <h3 class="settings__title">Malakalari</h3>
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="#"><i class="fa-solid fa-plus"></i>Malaka
+              qo'shish</a>
+          </div>
+
+          <table class="settings__table">
+            {%for skil in profil.skill_set.all%}
+            <tr>
+              <td class="settings__tableInfo">
+                <h4>{{skil.name}}</h4>
+                <p>{{skil.description}} </p>
+              </td>
+              <td class="settings__tableActions">
+                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="fa-regular fa-pen-to-square"></i>O'zgartirish</a>
+                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="fa-solid fa-x"></i>
+                  O'chirish</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </table>
+
+          <div class="settings">
+            <h3 class="settings__title">Loyihalar</h3>
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'project_add' %}"><i class="fa-solid fa-plus"></i> Loyiha
+              qo'shish</a>
+          </div>
+
+          <table class="settings__table">
+            {%for project in profil.project_set.all%}
+              <tr>
+                <td class="settings__thumbnail">
+                  <a href="{% url 'projects' project.id %}"><img src="{{project.image.url}}" alt="Project Thumbnail" /></a>
+                </td>
+                <td class="settings__tableInfo">
+                  <a href="single-project.html">{{project.title}}</a>
+                  <p>
+                    {{project.description|truncatechars:200}}
+                  </p>
+                </td>
+                <td class="settings__tableActions">
+                  <a class="tag tag--pill tag--main settings__btn" href="{% url 'project_edit' project.id %}"><i class="fa-solid fa-pen-to-square"></i> O'zgartirish</a>
+                  <a class="tag tag--pill tag--main settings__btn" href="{% url 'project_delete' project.id %}"><i class="fa-solid fa-x"></i>
+                    O'chirish</a>
+                </td>
+              </tr>
+            {% endfor %}
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock%}
